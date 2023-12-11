@@ -1,0 +1,71 @@
+.sign-in-section{
+  height: 400px;
+  width: 300px;
+  margin-left: 480px;
+  margin-top: 40px;
+  border: 1px solid gray;
+  border-radius: 8px;
+  box-shadow:  2px 2px 5px 3px gray;
+}
+.heading{
+  margin-top: 5%;
+  margin-left: 3%;
+  font-weight: bold;
+  font-size:x-large;
+}
+.form{
+  margin-top: 20%;
+  margin-left: 3%;
+}
+.user-input-field{
+  width: 270px;
+  height: 40px;
+  margin-left: 3%;
+  margin-top: 20%;
+  font-size: medium;
+  border-radius: 5px;
+}
+.pass-input-field{
+  width: 270px;
+  height: 40px;
+  margin-left: 3%;
+  margin-top: 5%;
+  border-radius: 5px;
+}
+.slogan{
+  font-size: small;
+  font-weight: lighter;
+  margin-left: 3%;
+}
+.sign-button{
+  color: white;
+  width: 270px;
+  background-color: #330066;
+  border: none;
+  border-radius: 19px;
+  height: 40px;
+  margin-left: 4%;
+  margin-top: 15%;
+}
+.forgot{
+  color: #330066;
+  font-size: medium;
+  margin-left: 3%;
+  text-decoration: none;
+}
+.logo{
+  height: 70px;
+  width: 100px
+}
+.passShow{
+  position: relative;
+  cursor: pointer;
+  color: #330066;
+  margin-left: 80%;
+  top: -35px;
+}
+.footer{
+  position: relative;
+  top: 120px;
+  text-align: center;
+}
