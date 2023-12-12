@@ -8,8 +8,6 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [modalMessage, setModalMessage] = useState('');
     
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -29,13 +27,12 @@ export default function Login() {
           alert('Successful Login');
           // Redirect or perform other actions as needed
         } else {
-          // Unsuccessful login
+          // Invalid credentials
           alert('Invalid Credentials');
         }
       } catch (error) {
-        // Handle other errors (e.g., network issues, server errors)
-        console.error('Login failed:', error.message);
-        alert('Login failed. Please try again.');
+        console.error(error);
+        // Handle other errors
       }
     };
 
