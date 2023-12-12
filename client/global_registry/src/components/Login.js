@@ -16,9 +16,10 @@ export default function Login() {
             password,
           });
     
-          const { token } = response.data;
+          const { message, token } = response.data;
     
           // Save the token (e.g., in local storage or state)
+          console.log(message);
           console.log('Login successful! Token:', token);
         } catch (error) {
           console.error('Login failed:', error.response.data.message);
@@ -29,12 +30,12 @@ export default function Login() {
         setShowPassword(!showPassword);
       };    
   return (
-    <diV>
+    <div>
         <img src={Logo} alt='GRPC-Logo' className='logo'/>
         <div className='sign-in-section'>
             <div>
                 <span className="heading">Sign in</span><br/>
-                <span className='slogan'>Rescue the perishing, Care for the dying</span>
+                <span className='slogan'>Rescue the Perishing, Care for the Dying</span>
             </div>
             <form>
                 <input type='text' placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)} className='user-input-field'/>
@@ -44,11 +45,12 @@ export default function Login() {
                 </div>
                 <a href='#' className='forgot'><span>Forgot password?</span></a>
                 <button className='sign-button' onClick={handleLogin}>Sign in</button>
+                <span className='no-account'>Don't have an account? Contact Administrator</span>
             </form>
             <footer className='footer'>
                 <span>&copy; 2023 Global Rescue Power Chapel</span>
             </footer>
         </div>
-      </diV>
+      </div>
   )
 }

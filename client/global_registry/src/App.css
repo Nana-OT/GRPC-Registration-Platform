@@ -46,6 +46,7 @@
   height: 40px;
   margin-left: 4%;
   margin-top: 15%;
+  cursor: pointer;
 }
 .forgot{
   color: #330066;
@@ -68,4 +69,9 @@
   position: relative;
   top: 120px;
   text-align: center;
+}
+.no-account{
+  font-size: small;
+  font-weight: lighter;
+  margin-left: 7%;
 }
