@@ -1,15 +1,29 @@
 import React from 'react';
 import { useState } from 'react';
+import Modal from 'react-modal';
 import '../App.css';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../images/Global-Icon.jpg'
 import axios from 'axios';
 
+Modal.setAppElement('#root'); // Set the root element for accessibility
+
 export default function Login() {
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [modalContent, setModalContent] = useState('');
     const navigate = useNavigate();
+
+    const openModal = (content) => {
+      setModalContent(content);
+      setModalIsOpen(true);
+    };
+  
+    const closeModal = () => {
+      setModalIsOpen(false);
+    };
     
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -26,16 +40,18 @@ export default function Login() {
   
         if (response.data.success) {
           // Successful login
-          console.log('Successful Login');
+          openModal('Login Successful!');
           // Redirect or perform other actions as needed
           navigate('/dashboard')
         } else {
           // Invalid credentials
-          console.log('Invalid Credentials');
+          openModal('Invalid Credentials');
+
         }
       } catch (error) {
         console.error(error);
         // Handle other errors
+        openModal('An error occurred. Please try again later.');
       }
     };
 
@@ -61,6 +77,14 @@ export default function Login() {
                 <span>&copy; 2023 Global Rescue Power Chapel</span>
             </footer>
         </div>
-      </div>
+        <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel='Modal'
+        className='modal'>
+          <p>{modalContent}</p>
+          <button onClick={closeModal}>Close</button>
+        </Modal>
+    </div>
   )
 }
