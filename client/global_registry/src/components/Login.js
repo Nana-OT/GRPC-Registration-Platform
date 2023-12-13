@@ -1,6 +1,7 @@
-import React from 'react'
+import React from 'react';
 import { useState } from 'react';
 import '../App.css';
+import { useNavigate } from 'react-router-dom';
 import Logo from '../images/Global-Icon.jpg'
 import axios from 'axios';
 
@@ -8,6 +9,7 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
     
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -24,11 +26,12 @@ export default function Login() {
   
         if (response.data.success) {
           // Successful login
-          alert('Successful Login');
+          console.log('Successful Login');
           // Redirect or perform other actions as needed
+          navigate('/dashboard')
         } else {
           // Invalid credentials
-          alert('Invalid Credentials');
+          console.log('Invalid Credentials');
         }
       } catch (error) {
         console.error(error);
