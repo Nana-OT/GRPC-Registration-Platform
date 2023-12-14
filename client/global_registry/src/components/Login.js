@@ -40,12 +40,14 @@ export default function Login() {
   
         if (response.data.success) {
           // Successful login
-          openModal('Login Successful!');
+          console.log("Login Successful");
+          openModal('Login Successful');
           // Redirect or perform other actions as needed
           navigate('/dashboard')
         } else {
           // Invalid credentials
-          openModal('Invalid Credentials');
+          console.log("Invalid Credentials");
+          openModal('Invalid Credential.');
 
         }
       } catch (error) {
@@ -69,7 +71,7 @@ export default function Login() {
                     <input type={showPassword? 'text' : 'password'} id='passwordField' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Password' className='pass-input-field'/>
                     <span id='customToggle' className='passShow' onClick={togglePasswordVisibility}>{showPassword ? 'Hide' : 'Show'}</span>
                 </div>
-                <a href='#' className='forgot'><span>Forgot password?</span></a>
+                <span className='forgot'>Forgot password?</span>
                 <button type='submit' className='sign-button'>Sign in</button>
                 <span className='no-account'>Don't have an account? Contact Administrator</span>
             </form>
