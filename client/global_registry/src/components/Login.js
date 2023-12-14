@@ -48,7 +48,6 @@ export default function Login() {
           // Invalid credentials
           console.log("Invalid Credentials");
           openModal('Invalid Credential.');
-
         }
       } catch (error) {
         console.error(error);
