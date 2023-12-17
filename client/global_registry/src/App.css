@@ -141,7 +141,7 @@
   font-size:xx-large;
   margin-top: 120px;
 }
-.add-member-window {
+.unicast-window {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -150,25 +150,34 @@
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   z-index: 1000;
-  height: 20%;
-  width: 45%;
+  height: 40%;
+  width: 25%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 5px;
 }
-.add-member-window input{
+.unicast-window input{
   border-radius: 2px;
   border: 0.5px solid gray;
 }
-.form-row {
+.form-col {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   /* align-items: center; */
   margin-bottom: 10px;
   justify-content: space-between;
 }
-.form-row label {
-  margin-right: 10px;
+.form-row{
+  display: flex;
+  flex-direction: row;
+}
+.form-row, .message-box{
+  margin-top: 20px;
+}
+.message-box textarea{
+  width: 250px;
+  height: 60px;
 }
 .btns{
   display: flex;
@@ -198,4 +207,97 @@
 .gender{
   display: flex;
   margin-top: 10px;
+}
+/* App.css */
+.entries-container {
+  text-align: center;
+  margin: 20px auto; /* Adjust the margin as needed */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px; /* Adjust the margin as needed */
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  transition: background-color 0.3s ease; /* Add transition effect */
+}
+
+th {
+  background-color: #a37bcb;
+}
+tr:hover {
+  background-color: #f5f5f5;
+}
+.remove-member-window{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  height: 20%;
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+}
+.remove-btns{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20%;
+}
+.remove-btns button{
+  background-color: #330066;
+  color: white;
+  border: none;
+  height: 20px;
+  width: 65px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+.search-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.search-container input{
+  width: 220px;
+}
+/* Add this to your App.css or create a new CSS file */
+.suggestions {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 100%; /* Position it below the input field */
+  left: 0;
+  width: calc(100% - 3px); /* Adjusted width to include padding */
+  max-height: 150px;
+  overflow-y: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 5px 5px;
+  background-color: white;
+  z-index: 1;
+}
+
+.suggestions li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestions li:hover,
+.suggestions li.selected {
+  background-color: #f2f2f2;
 }
