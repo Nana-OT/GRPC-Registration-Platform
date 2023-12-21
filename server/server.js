@@ -106,6 +106,53 @@ const userSchema = new mongoose.Schema({
     }
   });
 
+  app.get('/api/get-entry/:id', cors(), async (req, res) => {
+    const { id } = req.params;
+  
+    try {
+      const entry = await Member.findById(id);
+  
+      if (entry) {
+        res.status(200).json({ success: true, entry });
+      } else {
+        res.status(404).json({ success: false, message: 'Entry not found' });
+      }
+    } catch (error) {
+      console.error('Error fetching entry details:', error);
+      res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
+  });
+  
+  // Add a new route for updating a member
+app.put('/api/update-member/:id', cors(), async (req, res) => {
+  const memberId = req.params.id;
+  const { firstName, lastName, phoneNumber, address, gender } = req.body;
+
+  try {
+    // Find the member by ID and update the fields
+    const updatedMember = await Member.findByIdAndUpdate(
+      memberId,
+      {
+        firstName,
+        lastName,
+        phoneNumber,
+        address,
+        gender,
+      },
+      { new: true }
+    );
+
+    if (updatedMember) {
+      res.status(200).json({ success: true, message: 'Member updated successfully' });
+    } else {
+      res.status(404).json({ success: false, message: 'Member not found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+});
+  
   app.delete('/api/remove-member', cors(), async (req, res) => {
     const { firstName, lastName } = req.body;
   
