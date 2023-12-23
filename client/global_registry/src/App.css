@@ -1,310 +1,35 @@
-.sign-in-section{
-  height: 400px;
-  width: 300px;
-  margin-left: 480px;
-  margin-top: 40px;
-  border: 1px solid gray;
-  border-radius: 8px;
-  box-shadow:  2px 2px 5px 3px gray;
+.logo{
+  width: 50px
 }
-.heading{
+.login-section{
+  width: 350px;
+  height: 430px;
+  margin-left: 35%;
   margin-top: 5%;
-  margin-left: 3%;
-  font-weight: bold;
-  font-size:x-large;
+  padding: 30px;
+  box-shadow: 0 0 5px grey;
+  border-radius: 10px;
 }
-.form{
-  margin-top: 20%;
-  margin-left: 3%;
+.forgot{
+  font-size: small;
+  color: blueviolet;
+  cursor: pointer;
 }
-.user-input-field{
-  width: 270px;
-  height: 40px;
-  margin-left: 3%;
-  margin-top: 20%;
-  font-size: medium;
-  border-radius: 5px;
-}
-.pass-input-field{
-  width: 270px;
-  height: 40px;
-  margin-left: 3%;
-  margin-top: 5%;
-  border-radius: 5px;
+.login-section input{
+  width: 250px;
 }
 .slogan{
   font-size: small;
-  font-weight: lighter;
-  margin-left: 3%;
 }
-.sign-button{
-  color: white;
-  width: 270px;
-  background-color: #330066;
-  border: none;
-  border-radius: 19px;
-  height: 40px;
-  margin-left: 4%;
-  margin-top: 15%;
-  cursor: pointer;
-}
-.forgot{
-  color: #330066;
-  font-size: medium;
-  margin-left: 3%;
-  text-decoration: none;
-  cursor: pointer;
-}
-.logo{
-  height: 70px;
-  width: 100px
-}
-.passShow{
-  position: relative;
-  cursor: pointer;
-  color: #330066;
-  margin-left: 80%;
-  top: -35px;
-}
-.footer{
-  position: fixed;
-  bottom: 0;
-  text-align: center;
-}
-.no-account{
-  font-size: small;
-  font-weight: lighter;
-  margin-left: 7%;
-}
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.nav-bar{
   background-color: white;
-  padding: 20px;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  width: 100%;
-  text-align: center;
+  box-shadow: 0 0 7px grey;
 }
-.navbar{
-  background-color: white;
-  color: #330066; 
-  box-shadow:  2px 2px 5px 3px gray;
+.nav-brand{
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 25px;
-  height: 30px;
-}
-.logo-container{
-  display: flex;
-  align-items: center;
-  margin-left: 80px;
-}
-.churchName{
-  font-weight: bold;
-}
-.nav-logo{
-  height: 30px;
-  width: 50px;
-}
-.navbar-options {
-  display: flex;
-  margin-right: 100px;
-}
-.navbar-option {
-  margin-left: 15px;
-  color: #330066;
-  text-decoration: none;
-  font-weight: bold;
-  border: none;
-  background-color: white;
-}
-.navbar-option:hover{
-  color: white;
-  background-color: #330066;
-  height: auto;
-  width: auto;
-  transform: scale(1.3); /* Adjust the scale factor as needed */
-  transition: transform 0.3s;
-  border-radius: 8px;
-}
-.dash-welcome{
-  text-align: center;
-}
-.No-Entries{
-  text-align: center;
-  font-weight: lighter;
-  font-size:xx-large;
-  margin-top: 120px;
-}
-.form-col {
-  display: flex;
-  flex-direction: column;
-  /* align-items: center; */
-  margin-bottom: 10px;
-  justify-content: space-between;
-}
-.form-row{
-  display: flex;
-  flex-direction: row;
-}
-.form-row, .message-box{
-  margin-top: 20px;
-}
-.btns{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-top: 5%;
-}
-.btns button{
-  background-color: #330066;
-  color: white;
-  border: none;
-  height: 20px;
-  width: 50px;
-  border-radius: 6px;
-  font-weight: bold;
-}
-.close-btn{
-  margin-left: 7px;
 
 }
-.reset-btn{
-  margin-right: 7px;
-}
-.btn{
-  margin-right: 5px;
-}
-/* App.css */
-.entries-container {
-  text-align: center;
-  margin: 20px auto; /* Adjust the margin as needed */
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-.entries-th{
-  box-shadow:  0 5px 0 0 grey;
-}
-table {
-  border-collapse: collapse;
-  width: 100%;
-  margin-top: 20px; /* Adjust the margin as needed */
-}
-.td-btns{
-  display: flex;
-  flex-direction: row;
-}
-.td-btns button:hover{
-  background-color: #330066;
-  color: white;
-  border-radius: 8px;
-}
-.td-btns-d{
-  margin-left: 7px;
-  border: none;
-  background-color: white;
-  color: #330066;
-  cursor: pointer;
-}
-.td-btns-v{
-  border: none;
-  background-color: white;
-  color: #330066;
-  cursor: pointer;
-}
-th:nth-child(6),
-td:nth-child(6) {
-  width: 120px; /* Set the width of the second column (index 1) */
-}
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-  transition: background-color 0.3s ease; /* Add transition effect */
-}
-
-th {
-  background-color: #a37bcb;
-}
-tr:hover {
-  background-color: #f5f5f5;
-}
-.remove-member-window{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-  height: 20%;
-  width: 35%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 5px;
-}
-.remove-btns{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-top: 20%;
-}
-.remove-btns button{
-  background-color: #330066;
-  color: white;
-  border: none;
-  height: 20px;
-  width: 65px;
-  border-radius: 6px;
-  font-weight: bold;
-}
-.search-container{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-.search-container input{
-  width: 220px;
-}
-/* Add this to your App.css or create a new CSS file */
-.suggestions {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  top: 100%; /* Position it below the input field */
-  left: 0;
-  width: calc(100% - 3px); /* Adjusted width to include padding */
-  max-height: 150px;
-  overflow-y: auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid #ccc;
-  border-top: none;
-  border-radius: 0 0 5px 5px;
-  background-color: white;
-  z-index: 1;
-}
-
-.suggestions li {
-  padding: 8px;
-  cursor: pointer;
-}
-
-.suggestions li:hover,
-.suggestions li.selected {
-  background-color: #f2f2f2;
-}
-.entry-details-table{
-  width: 40%; /* Set the desired width for the table */
-  margin-right: 20px; /* Center the table on the page and provide some spacing */
-  border-collapse: collapse;
-}
-.entry-details-table :nth-child(1){
-  width: 230px;
+.church-logo{
+  width: 40px;
+  height: 25px;
 }

@@ -59,25 +59,27 @@ export default function Login() {
   return (
     <div>
         <img src={Logo} alt='GRPC-Logo' className='logo'/>
-        <div className='sign-in-section'>
+        <section className='login-section'>
+            <form onSubmit={handleLogin}>
             <div>
-                <span className="heading">Sign in</span><br/>
+                <span className="fw-bold fs-5">Sign in</span><br/>
                 <span className='slogan'>Rescue the Perishing, Care for the Dying</span>
             </div>
-            <form onSubmit={handleLogin}>
+            <div className='mt-5'>
                 <input type='text' placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)} className='user-input-field'/>
                 <div>
-                    <input type={showPassword? 'text' : 'password'} id='passwordField' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Password' className='pass-input-field'/>
+                    <input type={showPassword? 'text' : 'password'} id='passwordField' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Password' className='pass-input-field mt-2'/>
                     <span id='customToggle' className='passShow' onClick={togglePasswordVisibility}>{showPassword ? 'Hide' : 'Show'}</span>
                 </div>
-                <span className='forgot'>Forgot password?</span>
-                <button type='submit' className='sign-button'>Sign in</button>
-                <span className='no-account'>Don't have an account? Contact Administrator</span>
+                <span className='forgot m-1'>Forgot password?</span><br/>
+                <button type='submit' className='sign-button m-2'>Sign in</button><br/>
+                <span className='no-account mt-3'>Don't have an account? Contact Administrator</span><br/>
+              </div>
             </form>
-            <footer className='footer'>
-                <span>&copy; 2023 Global Rescue Power Chapel</span>
-            </footer>
-        </div>
+        </section>
+        <footer className='fixed-bottom text-center'>
+          <span>&copy; 2023 Global Rescue Power Chapel</span>
+          </footer>
         <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

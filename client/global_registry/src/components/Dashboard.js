@@ -1,53 +1,54 @@
-import React from 'react';
-import Logo from '../images/Global-Icon.jpg';
-import { useState, useEffect } from 'react';
-import Entries from './Entries';
+import React, { useEffect, useState } from 'react'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import Container from 'react-bootstrap/Container'
+import Button from 'react-bootstrap/Button';
+import Logo from '../images/Global-Icon.jpg'
 import axios from 'axios';
+import Entries from './Entries';
 
 export default function Dashboard() {
-  const [entries, setEntries] = useState([]);
- 
+  const [entries, setEntries] = useState({});
 
-  useEffect(() => {
-    const fetchEntries = async () => {
-      try {
-        // Make a GET request to the server to get all entries
-        const response = await axios.get('http://localhost:3001/api/get-entries');
-        setEntries(response.data.entries);
-      } catch (error) {
-        console.error('Error fetching entries:', error.message);
+  useEffect(() =>{
+    const fetchData = async () =>{
+      try{
+      //Make a GET request
+      const response = await axios.get('http://localhost:3001/api/get-entries');
+
+      // Update the state with the fetched entries
+      setEntries(response.data.entries);
+      }catch(error){
+        console.log('Error fetching entries:', error.message)
       }
     };
 
-    fetchEntries();
-  }, []); // The empty dependency array ensures that this effect runs only once, similar to componentDidMount
+     // Call the fetchData function when the component mounts
+     fetchData();
+  }, []) // The empty dependency array ensures that this effect runs only once
 
   return (
     <div>
-      {/* Navbar */}
-      <nav className="navbar">
-        <div className="logo-container">
-          <img src={Logo} alt="GRPC-Logo" className="nav-logo"/>
-          <span className='churchName'>Global Rescue Power Chapel (Accra Branch)</span>
-        </div>
-        <div className="navbar-options">
-          <button className="navbar-option">Unicast</button>
-          <button className="navbar-option">Multicast</button>
-          <button className="navbar-option">Broadcast</button>
-        </div>
-      </nav>
-
-      {/* Main Content */}
-      <div className="main-content">
-        <h2 className='dash-welcome'>Welcome to the Dashboard</h2>
-        {entries.length > 0 ? (
-          <Entries entries={entries} />
-        ) : (
-          <h3 className='No-Entries'>There are <span>No Entries</span> currently</h3>
-        )}
-        <div>
-        </div>
+      <Navbar className='nav-bar' data-bs-theme="light">
+        <Container>
+          <Navbar.Brand href="#home" className='nav-brand'>
+            <img src={Logo} alt='GPRC-Logo' className='church-logo'/>
+            <h6>Global Rescue Power Chapel</h6>
+          </Navbar.Brand>
+          <Nav className="float-end">
+            <Nav.Link href="#unicast">Unicast</Nav.Link>
+            <Nav.Link href="#multicast">Multicast</Nav.Link>
+            <Nav.Link href="#broadcast">Broadcast</Nav.Link>
+          </Nav>
+          </Container>
+      </Navbar>
+      <Entries records={entries}/>
+      <div>
+        <p className='text-center'>Click to add a new entry</p>
+      </div>
+      <div className='d-grid gap-2 col-1 mx-auto mt-2'>     
+        <Button variant="secondary">Add</Button>
       </div>
     </div>
-  );
+  )
 }
