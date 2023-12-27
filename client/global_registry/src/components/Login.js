@@ -61,19 +61,19 @@ export default function Login() {
         <img src={Logo} alt='GRPC-Logo' className='logo'/>
         <section className='login-section'>
             <form onSubmit={handleLogin}>
-            <div>
-                <span className="fw-bold fs-5">Sign in</span><br/>
+            <div className='section-title'>
+                <span className="fw-bold fs-4">Sign in</span><br/>
                 <span className='slogan'>Rescue the Perishing, Care for the Dying</span>
             </div>
             <div className='mt-5'>
                 <input type='text' placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)} className='user-input-field'/>
                 <div>
-                    <input type={showPassword? 'text' : 'password'} id='passwordField' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Password' className='pass-input-field mt-2'/>
-                    <span id='customToggle' className='passShow' onClick={togglePasswordVisibility}>{showPassword ? 'Hide' : 'Show'}</span>
+                    <input type={showPassword? 'text' : 'password'} id='passwordField' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Password' className='pass-input-field'/>
+                    <span id='customToggle' className='passShow' onClick={togglePasswordVisibility}>{showPassword ? 'hide' : 'show'}</span>
                 </div>
-                <span className='forgot m-1'>Forgot password?</span><br/>
-                <button type='submit' className='sign-button m-2'>Sign in</button><br/>
-                <span className='no-account mt-3'>Don't have an account? Contact Administrator</span><br/>
+                <span className='forgot m-2'>Forgot password?</span><br/>
+                <button type='submit' className='sign-in-btn'>Sign in</button><br/>
+                <span className='no-account mt-3 slogan'>Don't have an account? Contact Administrator</span><br/>
               </div>
             </form>
         </section>
