@@ -39,6 +39,7 @@
 .nav-bar{
   background-color: white;
   box-shadow: 0 0 7px grey;
+  width: auto;
 }
 .nav-brand{
   display: flex;

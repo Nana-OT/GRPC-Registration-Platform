@@ -2,6 +2,7 @@ import React from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Entries({records, onAddEntry}) {
   const [newEntry, setNewEntry] = useState({
@@ -11,11 +12,16 @@ export default function Entries({records, onAddEntry}) {
     gender: '',
     address: '',
   });
+  
+  const navigate = useNavigate();
 
   if (!Array.isArray(records)) {
     console.error('Invalid data structure for records:', records);
-    return null; // or render an appropriate message
-  }
+    return null; 
+  }  
+  const handleEditClick = (id) => {
+    navigate(`/dashboard/get-entry/${id}`); 
+  };
 
   return (
     <div>
@@ -39,10 +45,10 @@ export default function Entries({records, onAddEntry}) {
               <td>{record.firstName}</td>
               <td>{record.lastName}</td>
               <td>{record.phoneNumber}</td>
-              <td>{record.gender}</td>
+              <td>{record.gender.map(g => g.charAt(0).toUpperCase() + g.slice(1)).join(', ')}</td>
               <td>{record.address}</td>
               <td className='actions'>
-                <Button variant="secondary">Edit</Button>
+                <Button variant="secondary" onClick={() => handleEditClick(record.id)}>Edit</Button>
                 <Button variant="warning">Delete</Button>
               </td>
             </tr>

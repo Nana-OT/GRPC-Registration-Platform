@@ -110,7 +110,7 @@ const userSchema = new mongoose.Schema({
     const { id } = req.params;
   
     try {
-      const entry = await Member.findById(id);
+      const entry = await Member.findById(_id);
   
       if (entry) {
         res.status(200).json({ success: true, entry });
