@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 
 export default function EntryDetailsPage() {
-    const { id } = useParams();
+    const { _id } = useParams();
     const [record, setRecord] = useState({});
     const [isEditing, setIsEditing] = useState(false);
     const [editableEntry, setEditableEntry] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.get(`/api/get-entry/${id}`);
+            console.log("The ID is", _id);
+            const response = await axios.get(`http://localhost:3001/api/get-entry/${_id}`);
             if (response.data && response.data.entry) {
-                setRecord(response.data);
-                setEditableEntry(response.data.entry);
+              setRecord(response.data.entry)
+              setEditableEntry(response.data.entry);
             }
           } catch (error) {
             console.error('Error fetching entry:', error);
@@ -24,18 +26,25 @@ export default function EntryDetailsPage() {
           }
         };
         fetchData();
-      }, [id]);
+      }, [_id]);
 
       const handleChange = (event) => {
-        setRecord({ ...record, [event.target.name]: event.target.value });
+        // setRecord({ ...record, [event.target.name]: event.target.value });
+        setEditableEntry({
+          ...editableEntry,
+          [event.target.name]: event.target.value,
+        });
       };
     
       const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-          const response = await axios.put(`/api/update-member/${id}`, record);
+          const response = await axios.put(`http://localhost:3001/api/update-member/${_id}`, editableEntry);
           console.log('Member updated:', response.data);
           setIsEditing(false);
+          alert("Details Update Succesfully");
+          navigate('/dashboard');
+
           // Handle success, e.g., display a success message or redirect
         } catch (error) {
           console.error('Error updating member:', error);
@@ -59,24 +68,21 @@ export default function EntryDetailsPage() {
 
   return (
     <div>
-        <h1>Edit Entry</h1>
-      <Table>
+        <h5 className='text-center mt-5'>Update Entry</h5>
+      <Table className='mt-4 table-dark table-hover table-bordered'>
         <thead className="form-group">
-            <tr>
-                <td>First Name</td>
+            <tr className='table-info'>
+                <th> First Name</th>
+                <th> Last Name</th>
+                <th> Phone Number</th>
+                <th> Address</th>
+                <th> Gender</th>
             </tr>                 
         </thead>
-        <tbody>
-            <tr>
-                <td>
-                <input type="text" id="firstName" name="firstName" value={record.firstName}             onChange={handleChange} required/> 
-                </td>
-            </tr>
-            <tbody>
+        <tbody className='table-group-divider'>
           {Object.keys(record).length > 0 ? (
             <>
               <tr>
-                <th>First Name:</th>
                 <td>
                   {isEditing ? (
                     <input
@@ -89,9 +95,6 @@ export default function EntryDetailsPage() {
                     record.firstName
                   )}
                 </td>
-              </tr>
-              <tr>
-                <th>Last Name:</th>
                 <td>
                   {isEditing ? (
                     <input
@@ -103,10 +106,7 @@ export default function EntryDetailsPage() {
                   ) : (
                     record.lastName
                   )}
-                </td>
-              </tr>
-              <tr>
-                <th>Phone Number:</th>
+                </td>              
                 <td>
                   {isEditing ? (
                     <input
@@ -119,9 +119,6 @@ export default function EntryDetailsPage() {
                     record.phoneNumber
                   )}
                 </td>
-              </tr>
-              <tr>
-                <th>Address:</th>
                 <td>
                   {isEditing ? (
                     <input
@@ -134,9 +131,6 @@ export default function EntryDetailsPage() {
                     record.address
                   )}
                 </td>
-              </tr>
-              <tr>
-                <th>Gender:</th>
                 <td>
                   {isEditing ? (
                     <input
@@ -157,12 +151,11 @@ export default function EntryDetailsPage() {
             </tr>
           )}
         </tbody>
-        </tbody>
     </Table>
     {isEditing ? (
-        <div>
-          <Button onClick={handleSubmit}>Save</Button>
-          <Button onClick={handleCancel}>Cancel</Button>
+        <div className='position-absolute start-50 translate-middle top-50'>
+          <Button onClick={handleSubmit} variant='success'>Save</Button>
+          <Button onClick={handleCancel} variant='danger' className='cancel'>Cancel</Button>
         </div>
       ) : (
         <Button onClick={handleEdit}>Edit</Button>

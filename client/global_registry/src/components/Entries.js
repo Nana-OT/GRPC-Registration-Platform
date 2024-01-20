@@ -3,6 +3,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+// import axios from 'axios';
 
 export default function Entries({records, onAddEntry}) {
   const [newEntry, setNewEntry] = useState({
@@ -12,20 +13,48 @@ export default function Entries({records, onAddEntry}) {
     gender: '',
     address: '',
   });
+  const [showAddForm, setShowAddForm] = useState(false);
   
   const navigate = useNavigate();
+
+  const handleAddClick = () => {
+    setShowAddForm(true);
+  };
+
+  const handleSaveClick = () => {
+    onAddEntry(newEntry);
+    // Display an alert
+    alert('Member added successfully');
+    window.location.reload();
+    // Navigate away from the current page
+    navigate('/dashboard');
+  };
+
+  const handleCancelClick = () => {
+    setShowAddForm(false);
+    // Reset the form fields
+    setNewEntry({
+      firstName: '',
+      lastName: '',
+      phoneNumber: '',
+      gender: '',
+      address: '',
+    });
+  };
 
   if (!Array.isArray(records)) {
     console.error('Invalid data structure for records:', records);
     return null; 
-  }  
-  const handleEditClick = (id) => {
-    navigate(`/dashboard/get-entry/${id}`); 
-  };
+  } 
 
   return (
     <div>
-      <Table className='mt-2 table-dark table-hover table-bordered'>
+    {!showAddForm && (
+        <Button variant="secondary" className='start-50 translate-middle position-relative mt-5' onClick={handleAddClick}>
+          Add Member
+        </Button>
+      )}
+      <Table className='table-dark table-hover table-bordered'>
       <thead>
         <tr className='table-info'>
           <th>Id</th>
@@ -48,13 +77,14 @@ export default function Entries({records, onAddEntry}) {
               <td>{record.gender.map(g => g.charAt(0).toUpperCase() + g.slice(1)).join(', ')}</td>
               <td>{record.address}</td>
               <td className='actions'>
-                <Button variant="secondary" onClick={() => handleEditClick(record.id)}>Edit</Button>
-                <Button variant="warning">Delete</Button>
+                <Button variant="secondary" onClick={() =>  navigate(`/dashboard/get-entry/${record._id}`)}>Update</Button>
+                <Button variant="warning" className='del'>Delete</Button>
               </td>
             </tr>
           ))
         }
-        <tr>
+        {showAddForm && (
+        <tr className='new-entry'>
             <td>{records.length + 1}</td>
             <td>
               <input
@@ -63,6 +93,7 @@ export default function Entries({records, onAddEntry}) {
                 onChange={(e) =>
                   setNewEntry({ ...newEntry, firstName: e.target.value })
                 }
+                required
               />
             </td>
             <td>
@@ -72,6 +103,7 @@ export default function Entries({records, onAddEntry}) {
                 onChange={(e) =>
                   setNewEntry({ ...newEntry, lastName: e.target.value })
                 }
+                required
               />
             </td>
             <td>
@@ -81,6 +113,7 @@ export default function Entries({records, onAddEntry}) {
                 onChange={(e) =>
                   setNewEntry({ ...newEntry, phoneNumber: e.target.value })
                 }
+                required
               />
             </td>
             <td>
@@ -90,6 +123,7 @@ export default function Entries({records, onAddEntry}) {
                 onChange={(e) =>
                   setNewEntry({ ...newEntry, gender: e.target.value })
                 }
+                required
               />
             </td>
             <td>
@@ -99,14 +133,19 @@ export default function Entries({records, onAddEntry}) {
                 onChange={(e) =>
                   setNewEntry({ ...newEntry, address: e.target.value })
                 }
+                required
               />
             </td>
             <td>
-              <Button variant="success" onClick={() => onAddEntry(newEntry)}>
+              <Button variant="success" onClick={handleSaveClick}>
                 Save
+              </Button>
+              <Button variant="secondary" className='cancel' onClick={handleCancelClick}>
+                Cancel
               </Button>
             </td>
           </tr>
+          )}
       </tbody>
       </Table>
     </div>

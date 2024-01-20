@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors'); // Import the cors middleware
+const { ObjectId } = mongoose.Types;
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -106,26 +107,35 @@ const userSchema = new mongoose.Schema({
     }
   });
 
-  app.get('/api/get-entry/:id', cors(), async (req, res) => {
-    const { id } = req.params;
+  app.get('/api/get-entry/:_id', cors(), async (req, res) => {
+    const { _id } = req.params;
+
+    if (!ObjectId.isValid(_id)) {
+      console.error('Invalid ObjectId:', _id);
+      return res.status(400).json({ success: false, message: 'Invalid ObjectId' });
+  }
   
     try {
-      const entry = await Member.findById(_id);
+        console.log('Fetching entry for ID:', _id);
+        const entry = await Member.findById(_id);
   
-      if (entry) {
-        res.status(200).json({ success: true, entry });
-      } else {
-        res.status(404).json({ success: false, message: 'Entry not found' });
-      }
+        if (entry) {
+            console.log('Entry found:', entry);
+            res.status(200).json({ success: true, entry });
+        } else {
+            console.log('Entry not found');
+            res.status(404).json({ success: false, message: 'Entry not found' });
+        }
     } catch (error) {
-      console.error('Error fetching entry details:', error);
-      res.status(500).json({ success: false, message: 'Internal Server Error' });
+        console.error('Error fetching entry details:', error);
+        res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
-  });
+});
+
   
   // Add a new route for updating a member
-app.put('/api/update-member/:id', cors(), async (req, res) => {
-  const memberId = req.params.id;
+app.put('/api/update-member/:_id', cors(), async (req, res) => {
+  const memberId = req.params._id;
   const { firstName, lastName, phoneNumber, address, gender } = req.body;
 
   try {
@@ -153,13 +163,13 @@ app.put('/api/update-member/:id', cors(), async (req, res) => {
   }
 });
   
-  app.delete('/api/remove-member', cors(), async (req, res) => {
-    const { firstName, lastName } = req.body;
-  
+  app.delete('/api/remove-member/:id', cors(), async (req, res) => {
+    const memberId = req.params.id;
+
     try {
-      // Remove the member from the Member collection
-      await Member.deleteOne({ firstName, lastName });
-  
+      // Remove the member from the Member collection using the _id field
+      await Member.deleteOne({ _id: memberId });
+
       res.status(200).json({ success: true, message: 'Member removed successfully' });
     } catch (error) {
       console.error(error);

@@ -30,7 +30,9 @@ export default function Dashboard() {
   const handleAddEntry = async (newEntry) => {
     try {
       // Make a POST request to save the new entry
-      await axios.post('http://localhost:3001/api/add-member', newEntry);
+      const update = await axios.post('http://localhost:3001/api/add-member', newEntry);
+      if (update){
+      }
       
     } catch (error) {
       console.log('Error adding entry:', error.message);
@@ -46,6 +48,7 @@ export default function Dashboard() {
             <img src={Logo} alt='GPRC-Logo' className='church-logo'/>
             <h6>Global Rescue Power Chapel</h6>
           </Navbar.Brand>
+          <h5 className='text-center mt-3'>Admin Dashboard</h5>
           <Nav className="float-end">
             <Nav.Link href="#unicast">Unicast</Nav.Link>
             <Nav.Link href="#multicast">Multicast</Nav.Link>
@@ -53,7 +56,6 @@ export default function Dashboard() {
           </Nav>
           </Container>
       </Navbar>
-      <h5 className='text-center mt-3'>Admin Dashboard</h5>
       <Entries records={entries} onAddEntry={handleAddEntry}/>
     </div>
   )

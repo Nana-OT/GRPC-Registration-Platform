@@ -61,5 +61,17 @@
 .actions{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+}
+.del{
+  margin-left: 8px;
+}
+.cancel{
+  margin-left: 8px;
+}
+table {
+  table-layout: fixed;  /* Optimize rendering for fixed layouts */
+  width: 100%;          /* Ensure table fills available space */
+}
+.new-entry input{
+  width: 100%;
 }
