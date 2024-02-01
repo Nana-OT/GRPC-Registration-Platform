@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import axios from 'axios';
 
-export default function Entries({records, onAddEntry}) {
+export default function Entries({records, onAddEntry, onDeleteEntry}) {
   const [newEntry, setNewEntry] = useState({
     firstName: '',
     lastName: '',
@@ -40,6 +40,11 @@ export default function Entries({records, onAddEntry}) {
       gender: '',
       address: '',
     });
+  };
+
+  const handleDeleteClick = (id) => {
+    // Call the onDeleteEntry prop to handle the deletion
+    onDeleteEntry(id);
   };
 
   if (!Array.isArray(records)) {
@@ -78,7 +83,7 @@ export default function Entries({records, onAddEntry}) {
               <td>{record.address}</td>
               <td className='actions'>
                 <Button variant="secondary" onClick={() =>  navigate(`/dashboard/get-entry/${record._id}`)}>Update</Button>
-                <Button variant="warning" className='del'>Delete</Button>
+                <Button variant="warning" className='del' onClick={() => handleDeleteClick(record._id)}>Delete</Button>
               </td>
             </tr>
           ))

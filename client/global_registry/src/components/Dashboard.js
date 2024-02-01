@@ -40,6 +40,23 @@ export default function Dashboard() {
     
   };
 
+  const handleDeleteEntry = (id) => {
+    // Make an API call to delete the member
+    axios.delete(`http://localhost:3001/api/remove-member/${id}`)
+      .then(response => {
+        if (response.data.success) {
+          window.location.reload();
+          alert('Member deleted successfully');
+        } else {
+          alert('Failed to delete member');
+        }
+      })
+      .catch(error => {
+        console.error('Error deleting member:', error);
+        alert('Failed to delete member');
+      });
+  };
+
   return (
     <div>
       <Navbar className='nav-bar' data-bs-theme="light">
@@ -56,7 +73,7 @@ export default function Dashboard() {
           </Nav>
           </Container>
       </Navbar>
-      <Entries records={entries} onAddEntry={handleAddEntry}/>
+      <Entries records={entries} onAddEntry={handleAddEntry} onDeleteEntry={handleDeleteEntry}/>
     </div>
   )
 }

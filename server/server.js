@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors'); // Import the cors middleware
 const { ObjectId } = mongoose.Types;
+const jwt = require('jsonwebtoken');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -47,6 +48,29 @@ const userSchema = new mongoose.Schema({
   // Create a Member model
   const Member = mongoose.model('Member', memberSchema, 'Members'); //
 
+  // Secret key for signing JWT tokens
+  const jwtSecretKey = 'just_a_secret';
+
+  // Middleware to check if the user is authenticated
+  const isAuthenticated = (req, res, next) => {
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res.status(401).json({ success: false, message: 'Unauthorized - Please login first' });
+      alert('Unauthorized - Please login first')
+    }
+
+    jwt.verify(token, jwtSecretKey, (err, decoded) => {
+      if (err) {
+        return res.status(401).json({ success: false, message: 'Unauthorized - Invalid token' });
+      }
+
+      // Attach the user object to the request for further use
+      req.user = decoded;
+      next();
+    });
+  };
+
   // Enable preflight request for routes
   app.options('/api/login', cors()); 
   app.options('/api/add-member', cors());
@@ -61,6 +85,8 @@ const userSchema = new mongoose.Schema({
       const user = await User.findOne({ username, password });
   
       if (user) {
+        //Create a JWT token
+        const token = jwt.sign({ username: user.username }, jwtSecretKey, { expiresIn: '1m' });
         // Successful login
         res.status(200).json({ success: true, message: 'Login successful' });
       } else {
